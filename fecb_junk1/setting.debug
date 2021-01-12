@@ -1,0 +1,33 @@
+
+13 name band_select_ch1 Value 325 
+13 name band_select_ch2 Value 325 
+13 name rf_swap Value 0 
+13 name sol_atten_ch1 Value 14 
+13 name sol_atten_ch2 Value 14 
+13 name fe_ngcal Value 0 
+13 name fe_walsh_sw Value 0 
+13 name fe_walsh_grp Value 0 
+13 name fe_ngcycle Value 25  // ng cycle.
+13 name rfcm_sw Value 0 
+13 name walshpattern Value 0 
+13 name walshfreq Value 0 
+13 name noisefreq Value 0 
+
+	 seq [535]  Subsystemid [fecb]  
+	 ID [15] CMDName [seturfsys] 
+	 TimeStamp [03-09-2019 15:47:11] 
+Number of Arg [13] 
+13 name band_select_ch1 Value 325 
+13 name band_select_ch2 Value 325 
+13 name rf_swap Value 0 
+13 name sol_atten_ch1 Value 14 
+13 name sol_atten_ch2 Value 14 
+13 name fe_ngcal Value 0 
+13 name fe_walsh_sw Value 0 
+13 name fe_walsh_grp Value 0 
+13 name fe_ngcycle Value 25 
+13 name rfcm_sw Value 0 
+13 name walshpattern Value 0 
+13 name walshfreq Value 0 
+13 name noisefreq Value 0 
+

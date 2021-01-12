@@ -1,0 +1,79 @@
+ #!  /bin/bash
+
+# Modified the script to log the STDOUT {took clue from $DBB date:4/11/2020}
+
+DIR_LOGERR=/home/lmcuser/ALL_MCM/ERRLOG
+if [ ! -d ${DIR_LOGERR} ]
+then
+      mkdir ${DIR_LOGERR}
+      chown -fR lmcuser.lmcuser ${DIR_LOGERR}
+      chmod a+rw ${DIR_LOGERR}
+fi
+
+cur_date=$(date +%d-%m-%Y-%H%M%S)
+
+
+cd /home/lmcuser/ALL_MCM/
+./stop_deviceclient.sh
+
+sleep 2
+
+id=`ps aux | grep mcmtest |  grep -v grep | awk '{ print $2 }'`;
+sudo kill -9 $id
+
+sleep 2
+
+cd /home/lmcuser/ALL_MCM/MCM
+sudo ./mcmtest >> ${DIR_LOGERR}/mcmtest_${cur_date}.log& 
+
+if [ $? -eq 0 ]
+then
+  echo "USB BASED MCMTEST PROGRAM ${HOSTNAME} started successfully"
+else
+  echo "### ERROR USB BASED MCMTEST PROGRAM not started"
+fi
+
+sleep 2
+
+cd /home/lmcuser/ALL_MCM/fecb
+
+./deviceClientfecb >> ${DIR_LOGERR}/fecb_${cur_date}.log& 
+
+if [ $? -eq 0 ]
+then
+  echo "FIFO BASED FECB Client ${HOSTNAME} started successfully"
+else
+  echo "### ERROR FIFO BASED FECB Client not started"
+
+fi
+
+sleep 2
+
+cd /home/lmcuser/ALL_MCM/FPS_MCM
+
+./deviceClientfps >> ${DIR_LOGERR}/fps_${cur_date}.log&
+
+if [ $? -eq 0 ]
+then
+  echo "FIFO BASED FPS Client ${HOSTNAME} started successfully"
+else
+  echo "### ERROR FIFO BASED FPS Client not started"
+
+fi
+
+sleep 2
+
+cd /home/lmcuser/ALL_MCM/IFLO
+
+./deviceClientiflo >> ${DIR_LOGERR}/IFLO_${cur_date}.log& 
+
+if [ $? -eq 0 ]
+then
+  echo "FIFO BASED IFLO Client ${HOSTNAME} started successfully"
+else
+  echo "### ERROR FIFO BASED IFLO Client not started"
+
+fi
+
+
+
